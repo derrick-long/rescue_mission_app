@@ -1,4 +1,5 @@
 class QuestionsController < ApplicationController
+  before_action :destroy_answers, only: [:destroy]
   def index
     @questions = Question.order("created_at DESC").all
   end
@@ -46,7 +47,11 @@ class QuestionsController < ApplicationController
 
 
 private
-  #params error
+  def destroy_answers
+    @question = Question.find(params[:id])
+    @answers = Answer.where(question_id: @question.id).destroy_all
+  end
+
   def question_params
     params.require(:question).permit(:description, :title)
   end

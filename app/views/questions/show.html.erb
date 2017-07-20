@@ -1,8 +1,7 @@
 <h1> <%= @question.title %> </h1>
-
-<p>
-  <%= @question.description %>
-</p>
+  <p>
+    <%= @question.description %>
+  </p>
 
 <%= link_to "Edit Question", edit_question_path(@question) %>
 <%= link_to "Delete", @question, method: :delete,
@@ -10,8 +9,10 @@
 
 
   <h2> Answers </h2>
-  <% @answers.each do |answer| %>
-  <p>  <%= markdown(answer.description) %> </p>
+  <% if @answers.nil? %>
+  <h3> No one has tackled this question yet. Be the first to help! </h3>
+  <% else %>
+  <%= render 'answers/answer_list' %>
   <% end %>
 
   <%= render 'answers/form' %>

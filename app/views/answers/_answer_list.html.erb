@@ -1,3 +1,5 @@
 <% @answers.each do |answer| %>
   <li><%= markdown(answer.description) %> </li>
+    <%= check_box_tag(:best) %>
+    <%= label_tag(:best, 'Best')%>
 <% end %>
